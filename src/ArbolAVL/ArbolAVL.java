@@ -1,15 +1,15 @@
 package ArbolAVL;
 
-class Arbol {
-	private Nodo root;
+class ArbolAVL {
+	private static AVLNode root;
 
 	public void insert(Comparable x) {
 		root = insertar(x, root);
 	}
 
-	private Nodo insertar(Comparable x, Nodo t) {
+	private AVLNode insertar(Comparable x, AVLNode t) {
 		if (t == null) {
-			t = new Nodo(x, null, null);
+			t = new AVLNode(x, null, null);
 		} else if (x.compareTo(t.dato) < 0) {
 			t.izquierdo = insertar(x, t.izquierdo);
 			if (height(t.izquierdo) - height(t.derecho) == 2) {
@@ -30,14 +30,15 @@ class Arbol {
 				}
 			}
 		return null;			//// CONFIRMAR QUE SIRVA ASI, estaba sin cerrar aca
+		
 	}
 
 	private static int max(int izquierdaHeight, int derechaHeight) {
 		return izquierdaHeight > derechaHeight ? izquierdaHeight : derechaHeight;
 	}
 
-	private static Nodo rotacionHijoIzquierdo(Nodo t) {
-		Nodo aux2 = t.izquierdo;
+	private static AVLNode rotacionHijoIzquierdo(AVLNode t) {
+		AVLNode aux2 = t.izquierdo;
 		t.izquierdo = aux2.derecho;
 		aux2.derecho = t;
 		t.height = max(height(t.izquierdo), height(t.derecho)) + 1;
@@ -45,8 +46,8 @@ class Arbol {
 		return aux2;
 	}
 
-	private static Nodo rotacionHijoDerecho(Nodo t) {
-		Nodo aux2 = t.derecho;
+	private static AVLNode rotacionHijoDerecho(AVLNode t) {
+		AVLNode aux2 = t.derecho;
 		t.derecho = aux2.izquierdo;
 		aux2.izquierdo = t;
 		t.height = max(height(t.izquierdo), height(t.derecho)) + 1;
@@ -54,17 +55,17 @@ class Arbol {
 		return aux2;
 	}
 
-	private static Nodo rotacionDobleHijoIzquierda(Nodo aux) {
+	private static AVLNode rotacionDobleHijoIzquierda(AVLNode aux) {
 		aux.izquierdo = rotacionHijoDerecho(aux.izquierdo);
 		return rotacionHijoIzquierdo(aux);
 	}
 
-	private static Nodo rotacionDobleHijoDerecho(Nodo aux) {
+	private static AVLNode rotacionDobleHijoDerecho(AVLNode aux) {
 		aux.derecho = rotacionHijoIzquierdo(aux.derecho);
 		return rotacionHijoDerecho(aux);
 	}
 
-	private static int height(Nodo t) {
+	private static int height(AVLNode t) {
 		return t == null ? -1 : t.height;
 	}
 
@@ -72,7 +73,7 @@ class Arbol {
 		imprimir(root);
 	}
 
-	private void imprimir(Nodo nodo) {
+	private void imprimir(AVLNode nodo) {
 		if (nodo != null) {
 			imprimir(nodo.derecho);
 			System.out.println("[" + nodo.dato + "]");
@@ -84,7 +85,7 @@ class Arbol {
 		imprimirPorAltura(root);
 	}
 
-	private void imprimirPorAltura(Nodo nodo) {
+	private void imprimirPorAltura(AVLNode nodo) {
 		if (nodo != null) {
 			imprimirPorAltura(nodo.derecho);
 			System.out.println(replicate(" ", height(root) - height(nodo)) + "[" + nodo.dato + "]");
@@ -104,7 +105,7 @@ class Arbol {
 		return calcularAltura(root);
 	}
 
-	private int calcularAltura(Nodo actual) {
+	private int calcularAltura(AVLNode actual) {
 		if (actual == null) {
 			return -1;
 		} else {
@@ -116,7 +117,7 @@ class Arbol {
 		imprimirPorNiveles(root);
 	}
 
-	private void imprimirPorNiveles(Nodo nodo) {
+	private void imprimirPorNiveles(AVLNode nodo) {
 		int max = 0;
 		int nivel = calcularAltura();
 		
@@ -124,7 +125,9 @@ class Arbol {
 		   max += Math.pow(2, nivel);
 		}
 		   max++; // Suma 1 para no utilizar la posicion 0 del array
-		   Nodo cola[] = new Nodo[max];
+		   
+		   AVLNode cola[] = new AVLNode[max];
+		   
 		   // Carga en la pos 1 el nodo raiz
 		   cola[1] = nodo;
 		   int x = 1;
