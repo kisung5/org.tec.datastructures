@@ -1,17 +1,17 @@
 package ArbolAVL;
 
-public class Nodo {
+public class AVLNode {
 	public Comparable<?> dato; // el dato del nodo
-	public Nodo izquierdo; // hijo izquierdo
-	public Nodo derecho; // hijo derecho
+	public AVLNode izquierdo; // hijo izquierdo
+	public AVLNode derecho; // hijo derecho
 	public int height; // altura
 
 	// Constructors
-	public Nodo(Comparable<?> dato) { 
+	public AVLNode(Comparable<?> dato) { 
 		this(dato, null, null); 
 		}
 
-	public Nodo(Comparable<?> dato, Nodo izq, Nodo der) { 
+	public AVLNode(Comparable<?> dato, AVLNode izq, AVLNode der) { 
 		this.dato = dato; 
 		this.izquierdo = izq; 
 		this.derecho = der; 
