@@ -1,19 +1,19 @@
-package ArbolB;
+package org.tec.datastructures.list;
 
 import java.util.*;
 
-public class Raiz {
+public class ArbolBRaiz {
 	public static int grado;
-	public Nodo primerNodo;
+	public ArbolBNodo primerNodo;
 	public static boolean esRaiz;
 	public static int nivel = 1;
 	public static int imprimir = 1;
 	public static String arbol = "";
 
-	public Raiz(int grado) {
-		Raiz.grado = grado;
-		primerNodo = new Nodo();
-		Lista llevarIngresos = new Lista();
+	public ArbolBRaiz(int grado) {
+		ArbolBRaiz.grado = grado;
+		primerNodo = new ArbolBNodo();
+		ArbolBLista llevarIngresos = new ArbolBLista();
 		esRaiz = true;
 	}
 
@@ -23,7 +23,7 @@ public class Raiz {
 			for (int i = 0; i < primerNodo.valores.length; i++) {
 				if (primerNodo.valores[i] == 0) {
 					primerNodo.valores[i] = valor;
-					Lista.ingresados.add(valor);
+					ArbolBLista.ingresados.add(valor);
 					j = i;
 					ordenar(primerNodo.valores, 6);
 					break;
@@ -60,7 +60,7 @@ public class Raiz {
 		}
 	}
 
-	public void setTengoHijos(Nodo nodo) {
+	public void setTengoHijos(ArbolBNodo nodo) {
 		if (nodo == primerNodo) {
 			if (primerNodo.nodo[0] != null) {
 				primerNodo.tengoHijos = true;
@@ -74,7 +74,7 @@ public class Raiz {
 		}
 	}
 
-	public void ingresarEnHijos(Nodo conHijos, int valor) {
+	public void ingresarEnHijos(ArbolBNodo conHijos, int valor) {
 		boolean entro = false;
 		if (conHijos != null && !conHijos.tengoHijos) {
 			ubicarValorEnArreglo(conHijos, valor);
@@ -89,13 +89,13 @@ public class Raiz {
 		}
 	}
 
-	public void ubicarValorEnArreglo(Nodo nodoA, int valor) {
+	public void ubicarValorEnArreglo(ArbolBNodo nodoA, int valor) {
 		int cont = 0;
 		while (cont <= 2 * grado) {
 			if (nodoA.valores[cont] == 0) {
 				nodoA.valores[cont] = valor;
 				ordenar(nodoA.valores, 5);
-				Lista.ingresados.add(valor);
+				ArbolBLista.ingresados.add(valor);
 				if (cont == 2 * grado) {
 					split(nodoA);
 				}
@@ -105,10 +105,10 @@ public class Raiz {
 		}
 	}
 
-	public void ordenarNodos(Nodo aOrdenar) {
+	public void ordenarNodos(ArbolBNodo aOrdenar) {
 		int i, j;
 		i = 0;
-		Nodo tmp;
+		ArbolBNodo tmp;
 
 		while (i < 2 * grado + 3 && aOrdenar.nodo[i] != null) {
 			j = 0;
@@ -124,10 +124,10 @@ public class Raiz {
 		}
 	}
 
-	public void split(Nodo nodo) {
+	public void split(ArbolBNodo nodo) {
 
-		Nodo hijoIzq = new Nodo();
-		Nodo hijoDer = new Nodo();
+		ArbolBNodo hijoIzq = new ArbolBNodo();
+		ArbolBNodo hijoDer = new ArbolBNodo();
 
 		// split general
 		if (nodo.nodo[0] != null) { // si tiene hijos antes de hacer el split entonces
@@ -187,7 +187,7 @@ public class Raiz {
 					break;
 				}
 			}
-			Nodo papa = nodo.padre;
+			ArbolBNodo papa = nodo.padre;
 			nodo = null;
 			int j = aqui;
 			while (j < 2 * grado + 2 && papa.nodo[j] != null && papa.nodo[j + 1] != null) {
@@ -206,20 +206,20 @@ public class Raiz {
 	public void eliminar(int valor) { // elimina de la lista el valor y vuelve a crear el arbol
 		boolean encontrado = false;
 		int j = 0;
-		for (int i = 0; i < Lista.ingresados.size() && !encontrado; i++) {
-			if (Lista.ingresados.get(i) == valor) {
+		for (int i = 0; i < ArbolBLista.ingresados.size() && !encontrado; i++) {
+			if (ArbolBLista.ingresados.get(i) == valor) {
 				encontrado = true;
 				j = i;
 			}
 		}
 		if (encontrado == true) {
-			Lista.ingresados.remove(j);
+			ArbolBLista.ingresados.remove(j);
 		} else {
 			System.out.println("El valor a eliminar no se encuentra en el arbol B");
 		}
-		ArrayList<Integer> auxiliar = Lista.ingresados;
-		Lista.ingresados = new ArrayList<Integer>();
-		primerNodo = new Nodo();
+		ArrayList<Integer> auxiliar = ArbolBLista.ingresados;
+		ArbolBLista.ingresados = new ArrayList<Integer>();
+		primerNodo = new ArbolBNodo();
 		primerNodo.tengoHijos = false;
 		for (int k = 0; k < auxiliar.size(); k++) {
 			Integer y = auxiliar.get(k);
@@ -230,8 +230,8 @@ public class Raiz {
 
 	public boolean buscar(int valor) {
 		boolean esta = false;
-		for (int i = 0; i < Lista.ingresados.size() && !esta; i++) {
-			if (Lista.ingresados.get(i) == valor) {
+		for (int i = 0; i < ArbolBLista.ingresados.size() && !esta; i++) {
+			if (ArbolBLista.ingresados.get(i) == valor) {
 				esta = true;
 				System.out.println("El elemento buscado si se encuentra en el arbol B");
 				return esta;
@@ -241,7 +241,7 @@ public class Raiz {
 		return false;
 	}
 
-	public String recorrer(Nodo nodo) {
+	public String recorrer(ArbolBNodo nodo) {
 		arbol += "\n";
 		for (int i = 0; i < 2 * grado + 1; i++) {
 			if (nodo.nodo[i] != null) {

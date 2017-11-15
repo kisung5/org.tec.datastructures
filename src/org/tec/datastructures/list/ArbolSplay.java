@@ -1,10 +1,10 @@
-package ArbolSplay;
+package org.tec.datastructures.list;
 
 import java.io.*;
 import java.lang.*;
 
 //Definicion del arbol splay	
-class Splay{
+class ArbolSplay{
   int cont;
   String codigot;
   NodoSplay raiz;
@@ -54,7 +54,7 @@ class Splay{
   }
   
   //Contructor
-  public Splay(){
+  public ArbolSplay(){
     raiz = null;
   }
   
@@ -467,20 +467,3 @@ class NodoSplay{
     Hde = null;
   }
 }
-
-//class SplayA{
-//	public static void main(String args[]){
-//		Splay nuevo=new Splay();
-//		nuevo.Insertar(1,1,1,"p",1,1,nuevo.raiz,"p2");
-//		nuevo.Insertar(2,1,1,"p",1,1,nuevo.raiz,"p2");
-//		nuevo.Insertar(8,1,1,"p",1,1,nuevo.raiz,"p2");
-//		nuevo.Insertar(12,1,1,"p",1,1,nuevo.raiz,"p2");
-//		nuevo.Insertar(3,1,1,"p",1,1,nuevo.raiz,"p2");
-//		nuevo.Insertar(16,1,1,"p",1,1,nuevo.raiz,"p2");
-//		nuevo.Insertar(19,1,1,"p",1,1,nuevo.raiz,"p2");
-//		nuevo.Insertar(5,1,1,"p",1,1,nuevo.raiz,"p2");
-//		nuevo.Insertar(10,1,1,"p",1,1,nuevo.raiz,"p2");
-//		nuevo.Insertar(90,1,1,"p",1,1,nuevo.raiz,"p2");	
-//		nuevo.Inorden(nuevo.raiz);
-//	}
-//}

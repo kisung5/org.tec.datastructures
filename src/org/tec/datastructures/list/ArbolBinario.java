@@ -1,34 +1,34 @@
-package ArbolBinario;
+package org.tec.datastructures.list;
 
-public class Arbol {
+public class ArbolBinario {
  
     /* Atributos */
-    private Nodo raiz;
+    private ArbolBinarioNodo raiz;
  
     /* Contructories */
-    public Arbol() {
+    public ArbolBinario() {
  
     }
  
-    public Arbol( int valor ) {
-        this.raiz = new Nodo( valor );
+    public ArbolBinario( int valor ) {
+        this.raiz = new ArbolBinarioNodo( valor );
     }
  
-    public Arbol( Nodo raiz ) {
+    public ArbolBinario( ArbolBinarioNodo raiz ) {
         this.raiz = raiz;
     }
  
     /* Setters y Getters */
-    public Nodo getRaiz() {
+    public ArbolBinarioNodo getRaiz() {
         return raiz;
     }
  
-    public void setRaiz(Nodo raiz) {
+    public void setRaiz(ArbolBinarioNodo raiz) {
         this.raiz = raiz;
     }
  
     /* Funciones */
-    private void addNodo( Nodo nodo, Nodo raiz ) {
+    private void addNodo( ArbolBinarioNodo nodo, ArbolBinarioNodo raiz ) {
         /* 2.- Partiendo de la raíz preguntamos: Nodo == null ( o no existe ) ? */
         if ( raiz == null ) {
             /* 
@@ -58,11 +58,11 @@ public class Arbol {
         }
     }
  
-    public void addNodo( Nodo nodo ) {
+    public void addNodo( ArbolBinarioNodo nodo ) {
         this.addNodo( nodo , this.raiz );
     }
  
-    public boolean removeNodo( Nodo nodo ) {
+    public boolean removeNodo( ArbolBinarioNodo nodo ) {
  
         /* Creamos variables para saber si tiene hijos izquierdo y derecho */
         boolean tieneNodoDerecha = nodo.getHojaDerecha() != null ? true : false;
@@ -93,15 +93,15 @@ public class Arbol {
         return false;
     }
  
-    private boolean removeNodoCaso1( Nodo nodo ) {
+    private boolean removeNodoCaso1( ArbolBinarioNodo nodo ) {
         /* lo único que hay que hacer es borrar el nodo y establecer el apuntador de su padre a nulo */
  
         /*
          * Guardemos los hijos del padre temporalmente para saber cuál de sus hijos hay que 
          * eliminar
          */
-        Nodo hijoIzquierdo = nodo.getPadre().getHojaIzquierda();
-        Nodo hijoDerecho = nodo.getPadre().getHojaDerecha();
+        ArbolBinarioNodo hijoIzquierdo = nodo.getPadre().getHojaIzquierda();
+        ArbolBinarioNodo hijoDerecho = nodo.getPadre().getHojaDerecha();
  
         if ( hijoIzquierdo == nodo ) {
             nodo.getPadre().setHojaIzquierda( null );
@@ -116,20 +116,20 @@ public class Arbol {
         return false;
     }
  
-    private boolean removeNodoCaso2( Nodo nodo ) {
+    private boolean removeNodoCaso2( ArbolBinarioNodo nodo ) {
         /* Borrar el Nodo y el subárbol que tenía pasa a ocupar su lugar */
  
         /*
          * Guardemos los hijos del padre temporalmente para saber cuál de sus hijos hay que 
          * eliminar
          */
-        Nodo hijoIzquierdo = nodo.getPadre().getHojaIzquierda();
-        Nodo hijoDerecho = nodo.getPadre().getHojaDerecha();
+        ArbolBinarioNodo hijoIzquierdo = nodo.getPadre().getHojaIzquierda();
+        ArbolBinarioNodo hijoDerecho = nodo.getPadre().getHojaDerecha();
  
         /*
          * Buscamos el hijo existente del nodo que queremos eliminar
          */
-        Nodo hijoActual = nodo.getHojaIzquierda() != null ? 
+        ArbolBinarioNodo hijoActual = nodo.getHojaIzquierda() != null ? 
                 nodo.getHojaIzquierda() : nodo.getHojaDerecha();
  
         if ( hijoIzquierdo == nodo ) {
@@ -157,9 +157,9 @@ public class Arbol {
         return false;
     }
  
-    private boolean removeNodoCaso3( Nodo nodo ) {
+    private boolean removeNodoCaso3( ArbolBinarioNodo nodo ) {
         /* Tomar el hijo derecho del Nodo que queremos eliminar */
-        Nodo nodoMasALaIzquierda = recorrerIzquierda( nodo.getHojaDerecha() );
+        ArbolBinarioNodo nodoMasALaIzquierda = recorrerIzquierda( nodo.getHojaDerecha() );
         if ( nodoMasALaIzquierda != null ) {
             /*
              * Reemplazamos el valor del nodo que queremos eliminar por el nodo que encontramos 
@@ -175,7 +175,7 @@ public class Arbol {
     }
  
     /* Recorrer de forma recursiva hasta encontrar el nodo más a la izquierda */
-    private Nodo recorrerIzquierda(Nodo nodo) {
+    private ArbolBinarioNodo recorrerIzquierda(ArbolBinarioNodo nodo) {
         if (nodo.getHojaIzquierda() != null) {
             return recorrerIzquierda( nodo.getHojaIzquierda() );
         }

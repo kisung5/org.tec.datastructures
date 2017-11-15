@@ -1,11 +1,11 @@
-package ArbolB;
+package org.tec.datastructures.list;
 
 import java.util.*;
 
-public class Lista {
+public class ArbolBLista {
 	public static ArrayList<Integer> ingresados;
 
-	public Lista() {
+	public ArbolBLista() {
 		ingresados = new ArrayList<Integer>();
 	}
 
