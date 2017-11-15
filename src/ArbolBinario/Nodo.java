@@ -10,7 +10,7 @@ public class Nodo {
 	private Nodo hojaDerecha;
 
 	/* Constructor */
-	public Nodo(int valor) {
+	public Nodo (int valor) {
 		this.valor = valor;
 	}
 
