@@ -1,32 +1,32 @@
 package org.tec.datastructures.tree;
 
-public class ArbolAVL {
-	private ArbolAVLNodo root;
+public class ArbolAVL <T extends Comparable<T>> {
+	private ArbolAVLNodo<T> root;
 
-	public void insert(Comparable x) {
+	public void insert(T x) {
 		root = insert(x, root);
 	}
 
-	
-	private ArbolAVLNodo insert(Comparable x, ArbolAVLNodo t) {
+	private ArbolAVLNodo<T> insert(T x, ArbolAVLNodo<T> t) {
 		if (t == null)
-			t = new ArbolAVLNodo(x, null, null);
+			t = new ArbolAVLNodo<>(x, null, null);
 		else if (x.compareTo(t.dato) < 0) {
 			t.izquierdo = insert(x, t.izquierdo);
 			if (height(t.izquierdo) - height(t.derecho) == 2)
 				if (x.compareTo(t.izquierdo.dato) < 0)
-					t = rotateWithLeftChild(t); //Caso 1
+					t = rotateWithLeftChild(t); 
 				else
-					t = doubleWithLeftChild(t); // Caso 2
+					t = doubleWithLeftChild(t);
 		} else if (x.compareTo(t.dato) > 0) {
 			t.derecho = insert(x, t.derecho);
 			if (height(t.derecho) - height(t.izquierdo) == 2)
 				if (x.compareTo(t.derecho.dato) > 0)
-					t = rotateWithRightChild(t); // Caso 4
+					t = rotateWithRightChild(t); 
 				else
-					t = doubleWithRightChild(t); // Caso 3
-		} else
-			;
+					t = doubleWithRightChild(t); 
+		} else {
+			
+		}
 		t.height = max(height(t.izquierdo), height(t.derecho)) + 1;
 		return t;
 	}
@@ -35,8 +35,8 @@ public class ArbolAVL {
 		return lhs > rhs ? lhs : rhs;
 	}
 
-	private static ArbolAVLNodo rotateWithLeftChild(ArbolAVLNodo k2) {
-		ArbolAVLNodo k1 = k2.izquierdo;
+	private ArbolAVLNodo<T> rotateWithLeftChild(ArbolAVLNodo<T> k2) {
+		ArbolAVLNodo<T> k1 = k2.izquierdo;
 		k2.izquierdo = k1.derecho;
 		k1.derecho = k2;
 		k2.height = max(height(k2.izquierdo), height(k2.derecho)) + 1;
@@ -44,8 +44,8 @@ public class ArbolAVL {
 		return k1;
 	}
 
-	private static ArbolAVLNodo rotateWithRightChild(ArbolAVLNodo k1) {
-		ArbolAVLNodo k2 = k1.derecho;
+	private ArbolAVLNodo<T> rotateWithRightChild(ArbolAVLNodo<T> k1) {
+		ArbolAVLNodo<T> k2 = k1.derecho;
 		k1.derecho = k2.izquierdo;
 		k2.izquierdo = k1;
 		k1.height = max(height(k1.izquierdo), height(k1.derecho)) + 1;
@@ -53,17 +53,17 @@ public class ArbolAVL {
 		return k2;
 	}
 
-	private static ArbolAVLNodo doubleWithLeftChild(ArbolAVLNodo k3) {
+	private ArbolAVLNodo<T> doubleWithLeftChild(ArbolAVLNodo<T> k3) {
 		k3.izquierdo = rotateWithRightChild(k3.izquierdo);
 		return rotateWithLeftChild(k3);
 	}
 
-	private static ArbolAVLNodo doubleWithRightChild(ArbolAVLNodo k1) {
+	private ArbolAVLNodo<T> doubleWithRightChild(ArbolAVLNodo<T> k1) {
 		k1.derecho = rotateWithLeftChild(k1.derecho);
 		return rotateWithRightChild(k1);
 	}
 
-	private static int height(ArbolAVLNodo t) {
+	private int height(ArbolAVLNodo<T> t) {
 		return t == null ? -1 : t.height;
 	}
 
@@ -71,7 +71,7 @@ public class ArbolAVL {
 		imprimir(root);
 	}
 
-	private void imprimir(ArbolAVLNodo nodo) {
+	private void imprimir(ArbolAVLNodo<T> nodo) {
 		if (nodo != null) {
 			imprimir(nodo.derecho);
 			System.out.println("[" + nodo.dato + "]");
@@ -83,7 +83,7 @@ public class ArbolAVL {
 		imprimirXaltura(root);
 	}
 
-	private void imprimirXaltura(ArbolAVLNodo nodo) {
+	private void imprimirXaltura(ArbolAVLNodo<T> nodo) {
 		if (nodo != null) {
 			imprimirXaltura(nodo.derecho);
 			System.out.println(replicate(" ", height(root) - height(nodo)) + "[" + nodo.dato + "]");
@@ -103,7 +103,7 @@ public class ArbolAVL {
 		return calcularAltura(root);
 	}
 
-	private int calcularAltura(ArbolAVLNodo actual) {
+	private int calcularAltura(ArbolAVLNodo<T> actual) {
 		if (actual == null)
 			return -1;
 		else
@@ -114,7 +114,7 @@ public class ArbolAVL {
 		imprimirPorNiveles(root);
 	}
 
-	private void imprimirPorNiveles(ArbolAVLNodo nodo) {
+	private void imprimirPorNiveles(ArbolAVLNodo<T> nodo) {
 		int max = 0;
 		int nivel = calcularAltura();
 
@@ -122,7 +122,7 @@ public class ArbolAVL {
 			max += Math.pow(2, nivel);
 		max++; 
 
-		ArbolAVLNodo cola[] = new ArbolAVLNodo[max];
+		ArbolAVLNodo<T> cola[] = new ArbolAVLNodo[max];
 
 		cola[1] = nodo;
 		int x = 1;

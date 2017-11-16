@@ -1,49 +1,46 @@
 package org.tec.datastructures.tree;
 
-public class ArbolBinarioNodo {
+public class ArbolBinarioNodo <T> {
 
-	/* Declaraciones de variables */
-	private int valor;
+	private T valor;
 
-	private ArbolBinarioNodo padre;
-	private ArbolBinarioNodo hojaIzquierda;
-	private ArbolBinarioNodo hojaDerecha;
+	private ArbolBinarioNodo<T> padre;
+	private ArbolBinarioNodo<T> hojaIzquierda;
+	private ArbolBinarioNodo<T> hojaDerecha;
 
-	/* Constructor */
-	public ArbolBinarioNodo(int valor) {
+	public ArbolBinarioNodo(T valor) {
 		this.valor = valor;
 	}
 
-	/* Setters y Getters */
-	public void setValor(int valor) {
+	public void setValor(T valor) {
 		this.valor = valor;
 	}
 
-	public int getValor() {
+	public T getValor() {
 		return valor;
 	}
 
-	public ArbolBinarioNodo getPadre() {
+	public ArbolBinarioNodo<T> getPadre() {
 		return padre;
 	}
 
-	public void setPadre(ArbolBinarioNodo padre) {
+	public void setPadre(ArbolBinarioNodo<T> padre) {
 		this.padre = padre;
 	}
 
-	public ArbolBinarioNodo getHojaIzquierda() {
+	public ArbolBinarioNodo<T> getHojaIzquierda() {
 		return hojaIzquierda;
 	}
 
-	public void setHojaIzquierda(ArbolBinarioNodo hojaIzquierda) {
+	public void setHojaIzquierda(ArbolBinarioNodo<T> hojaIzquierda) {
 		this.hojaIzquierda = hojaIzquierda;
 	}
 
-	public ArbolBinarioNodo getHojaDerecha() {
+	public ArbolBinarioNodo<T> getHojaDerecha() {
 		return hojaDerecha;
 	}
 
-	public void setHojaDerecha(ArbolBinarioNodo hojaDerecha) {
+	public void setHojaDerecha(ArbolBinarioNodo<T> hojaDerecha) {
 		this.hojaDerecha = hojaDerecha;
 	}
 

@@ -1,34 +1,30 @@
 package org.tec.datastructures.tree;
 
-public class ArbolBinario {
+public class ArbolBinario <T extends Comparable<T>> {
  
-    /* Atributos */
-    private ArbolBinarioNodo raiz;
- 
-    /* Contructories */
+    private ArbolBinarioNodo<T> raiz;
+
     public ArbolBinario() {
  
     }
  
-    public ArbolBinario( int valor ) {
-        this.raiz = new ArbolBinarioNodo( valor );
+    public ArbolBinario( T valor ) {
+        this.raiz = new ArbolBinarioNodo<>( valor );
     }
  
-    public ArbolBinario( ArbolBinarioNodo raiz ) {
+    public ArbolBinario( ArbolBinarioNodo<T> raiz ) {
         this.raiz = raiz;
     }
  
-    /* Setters y Getters */
-    public ArbolBinarioNodo getRaiz() {
+    public ArbolBinarioNodo<T> getRaiz() {
         return raiz;
     }
  
-    public void setRaiz(ArbolBinarioNodo raiz) {
+    public void setRaiz(ArbolBinarioNodo<T> raiz) {
         this.raiz = raiz;
     }
  
-    /* Funciones */
-    private void addNodo( ArbolBinarioNodo nodo, ArbolBinarioNodo raiz ) {
+    private void addNodo( ArbolBinarioNodo<T> nodo, ArbolBinarioNodo<T> raiz ) {
         /* 2.- Partiendo de la raíz preguntamos: Nodo == null ( o no existe ) ? */
         if ( raiz == null ) {
             /* 
@@ -39,7 +35,7 @@ public class ArbolBinario {
         }
         else {
             /* 4.- En caso negativo preguntamos: X < Nodo */
-            if ( nodo.getValor() <= raiz.getValor() ) {
+            if ( nodo.getValor().compareTo(raiz.getValor()) <= 0 ) {
                 /* 
                  * 5.- En caso de ser menor pasamos al Nodo de la IZQUIERDA del
                  * que acabamos de preguntar y repetimos desde el paso 2 
@@ -58,11 +54,11 @@ public class ArbolBinario {
         }
     }
  
-    public void addNodo( ArbolBinarioNodo nodo ) {
+    public void addNodo( ArbolBinarioNodo<T> nodo ) {
         this.addNodo( nodo , this.raiz );
     }
  
-    public boolean removeNodo( ArbolBinarioNodo nodo ) {
+    public boolean removeNodo( ArbolBinarioNodo<T> nodo ) {
  
         /* Creamos variables para saber si tiene hijos izquierdo y derecho */
         boolean tieneNodoDerecha = nodo.getHojaDerecha() != null ? true : false;
@@ -93,15 +89,15 @@ public class ArbolBinario {
         return false;
     }
  
-    private boolean removeNodoCaso1( ArbolBinarioNodo nodo ) {
+    private boolean removeNodoCaso1( ArbolBinarioNodo<T> nodo ) {
         /* lo único que hay que hacer es borrar el nodo y establecer el apuntador de su padre a nulo */
  
         /*
          * Guardemos los hijos del padre temporalmente para saber cuál de sus hijos hay que 
          * eliminar
          */
-        ArbolBinarioNodo hijoIzquierdo = nodo.getPadre().getHojaIzquierda();
-        ArbolBinarioNodo hijoDerecho = nodo.getPadre().getHojaDerecha();
+        ArbolBinarioNodo<T> hijoIzquierdo = nodo.getPadre().getHojaIzquierda();
+        ArbolBinarioNodo<T> hijoDerecho = nodo.getPadre().getHojaDerecha();
  
         if ( hijoIzquierdo == nodo ) {
             nodo.getPadre().setHojaIzquierda( null );
@@ -116,20 +112,20 @@ public class ArbolBinario {
         return false;
     }
  
-    private boolean removeNodoCaso2( ArbolBinarioNodo nodo ) {
+    private boolean removeNodoCaso2( ArbolBinarioNodo<T> nodo ) {
         /* Borrar el Nodo y el subárbol que tenía pasa a ocupar su lugar */
  
         /*
          * Guardemos los hijos del padre temporalmente para saber cuál de sus hijos hay que 
          * eliminar
          */
-        ArbolBinarioNodo hijoIzquierdo = nodo.getPadre().getHojaIzquierda();
-        ArbolBinarioNodo hijoDerecho = nodo.getPadre().getHojaDerecha();
+        ArbolBinarioNodo<T> hijoIzquierdo = nodo.getPadre().getHojaIzquierda();
+        ArbolBinarioNodo<T> hijoDerecho = nodo.getPadre().getHojaDerecha();
  
         /*
          * Buscamos el hijo existente del nodo que queremos eliminar
          */
-        ArbolBinarioNodo hijoActual = nodo.getHojaIzquierda() != null ? 
+        ArbolBinarioNodo<T> hijoActual = nodo.getHojaIzquierda() != null ? 
                 nodo.getHojaIzquierda() : nodo.getHojaDerecha();
  
         if ( hijoIzquierdo == nodo ) {
@@ -157,9 +153,9 @@ public class ArbolBinario {
         return false;
     }
  
-    private boolean removeNodoCaso3( ArbolBinarioNodo nodo ) {
+    private boolean removeNodoCaso3( ArbolBinarioNodo<T> nodo ) {
         /* Tomar el hijo derecho del Nodo que queremos eliminar */
-        ArbolBinarioNodo nodoMasALaIzquierda = recorrerIzquierda( nodo.getHojaDerecha() );
+        ArbolBinarioNodo<T> nodoMasALaIzquierda = recorrerIzquierda( nodo.getHojaDerecha() );
         if ( nodoMasALaIzquierda != null ) {
             /*
              * Reemplazamos el valor del nodo que queremos eliminar por el nodo que encontramos 
@@ -175,7 +171,7 @@ public class ArbolBinario {
     }
  
     /* Recorrer de forma recursiva hasta encontrar el nodo más a la izquierda */
-    private ArbolBinarioNodo recorrerIzquierda(ArbolBinarioNodo nodo) {
+    private ArbolBinarioNodo<T> recorrerIzquierda(ArbolBinarioNodo<T> nodo) {
         if (nodo.getHojaIzquierda() != null) {
             return recorrerIzquierda( nodo.getHojaIzquierda() );
         }
