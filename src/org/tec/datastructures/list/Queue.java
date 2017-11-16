@@ -7,6 +7,10 @@ public class Queue <T> {
 		list = new LinkedList<>();
 	}
 	
+	public boolean isEmpty() {
+		return list.isEmpty();
+	}
+	
 	public void enqueue(T element) {
 		list.add(element);
 	}

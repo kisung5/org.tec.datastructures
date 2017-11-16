@@ -1,4 +1,4 @@
-package org.tec.datastructures.list;
+package org.tec.datastructures.tree;
 
 public class ArbolBinarioNodo {
 
